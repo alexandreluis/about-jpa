@@ -1,24 +1,27 @@
 package br.com.rasmoo.restaurant.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "pratos")
-public class Prato
+@Table(name = "dish")
+public class Dish
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
     private boolean available;
     private BigDecimal value;
+
+    @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
-    public prato(){}
+    public Dish(){}
 
     public Integer getId() {
         return id;
@@ -70,7 +73,7 @@ public class Prato
 
     @Override
     public String toString() {
-        return "Prato{" +
+        return "Dish{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
