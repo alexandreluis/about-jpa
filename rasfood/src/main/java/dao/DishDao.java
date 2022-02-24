@@ -33,4 +33,9 @@ public class DishDao
     {
         this.entityManager.merge(dish);
     }
+
+    public void delete(final Dish dish)
+    {
+        this.entityManager.remove(dish);
+    }
 }
