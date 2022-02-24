@@ -28,4 +28,9 @@ public class DishDao
     {
         return this.entityManager.find(Dish.class, id);
     }
+
+    public void update(final Dish dish)
+    {
+        this.entityManager.merge(dish);
+    }
 }
