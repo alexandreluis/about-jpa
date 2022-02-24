@@ -1,6 +1,8 @@
 package service.test;
 
 import br.com.rasmoo.restaurant.entity.Dish;
+import dao.DishDao;
+import util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,10 +20,11 @@ public class dishService
         risoto.setAvailable(true);
         risoto.setValue(BigDecimal.valueOf(88.50));
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rasFood");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager = JPAUtil.getEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.persist(risoto);
+
+        DishDao dishDao = new DishDao(entityManager);
+        dishDao.save(risoto);
 
         entityManager.getTransaction().commit();
         entityManager.close();
