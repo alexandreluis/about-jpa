@@ -18,6 +18,9 @@ public class Menu
     private boolean available;
     private BigDecimal value;
 
+    @ManyToOne
+    private Category category;
+
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
