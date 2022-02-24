@@ -23,5 +23,7 @@ public class dishService
         entityManager.getTransaction().begin();
         entityManager.persist(risoto);
 
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }
