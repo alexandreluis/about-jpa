@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "dish")
-public class Dish
+@Table(name = "menu")
+public class Menu
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Dish
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
-    public Dish(){}
+    public Menu(){}
 
     public Integer getId() {
         return id;
