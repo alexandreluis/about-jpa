@@ -5,8 +5,6 @@ import dao.DishDao;
 import util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
 
@@ -24,7 +22,7 @@ public class dishService
         entityManager.getTransaction().begin();
 
         DishDao dishDao = new DishDao(entityManager);
-        dishDao.save(risoto);
+        dishDao.register(risoto);
 
         entityManager.getTransaction().commit();
         entityManager.close();
