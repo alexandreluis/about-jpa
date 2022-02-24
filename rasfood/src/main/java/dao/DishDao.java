@@ -21,7 +21,6 @@ public class DishDao
     public void register(final Dish dish)
     {
         this.entityManager.persist(dish);
-        System.out.println("Entity save: " + dish);
     }
 
     public Dish consult(final Integer id)

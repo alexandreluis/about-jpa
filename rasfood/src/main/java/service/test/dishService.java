@@ -18,13 +18,28 @@ public class dishService
         risoto.setAvailable(true);
         risoto.setValue(BigDecimal.valueOf(88.50));
 
+        Dish salmao = new Dish();
+        risoto.setName("Salmão ao molho de maracujá");
+        risoto.setDescription("Salmão grelhado ao molho de maracujá.");
+        risoto.setAvailable(true);
+        risoto.setValue(BigDecimal.valueOf(60.00));
+
         EntityManager entityManager = JPAUtil.getEntityManager();
         entityManager.getTransaction().begin();
 
         DishDao dishDao = new DishDao(entityManager);
         dishDao.register(risoto);
+        entityManager.flush();
+        dishDao.register(salmao);
+        entityManager.flush();
+        System.out.println("Dish to consult: " + dishDao.consult(1));
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        dishDao.delete(salmao);
+        System.out.println("Dish to consult: " + dishDao.consult(2));
+
+        entityManager.clear();
+        risoto.setValue(BigDecimal.valueOf(75.80));
+        dishDao.update(risoto);
+        System.out.println("Dish to consult: " + dishDao.consult(1));
     }
 }
