@@ -2,6 +2,7 @@ package dao;
 
 import br.com.rasmoo.restaurant.entity.Menu;
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 /*
@@ -13,6 +14,9 @@ D = DELETE
 public class MenuDao
 {
     private EntityManager entityManager;
+
+
+    public MenuDao(){}
 
     public MenuDao(EntityManager entityManager)
     {
@@ -29,10 +33,16 @@ public class MenuDao
         return this.entityManager.find(Menu.class, id);
     }
 
+    public List<Menu> consultPerValue(final BigDecimal filtro)
+    {
+        String jpql = "SELECT m FROM Menu m WHERE m.value = :value";
+        return this.entityManager.createQuery(jpql, Menu.class).setParameter("value", filtro).getResultList();
+    }
+
     public List<Menu> allConsult()
     {
-        String sql = "SELECT m FROM Menu m";
-        return this.entityManager.createQuery(sql, Menu.class).getResultList();
+        String jpql = "SELECT m FROM Menu m";
+        return this.entityManager.createQuery(jpql, Menu.class).getResultList();
     }
 
     public void update(final Menu menu)

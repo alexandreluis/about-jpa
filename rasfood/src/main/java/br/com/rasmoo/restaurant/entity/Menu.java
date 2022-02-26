@@ -24,13 +24,12 @@ public class Menu
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
-    public Menu(String name, String description, boolean available, BigDecimal value, Category category, LocalDateTime registrationDate) {
+    public Menu(String name, String description, boolean available, BigDecimal value, Category category) {
         this.name = name;
         this.description = description;
         this.available = available;
         this.value = value;
         this.category = category;
-        RegistrationDate = registrationDate;
     }
 
     public Menu(){}
