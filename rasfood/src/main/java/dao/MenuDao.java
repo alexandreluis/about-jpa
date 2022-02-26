@@ -1,8 +1,10 @@
 package dao;
 
 import br.com.rasmoo.restaurant.entity.Menu;
+
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -33,16 +35,40 @@ public class MenuDao
         return this.entityManager.find(Menu.class, id);
     }
 
+    public Menu consultPerName(final String filtro)
+    {
+        try
+        {
+            String jpql = "SELECT m FROM Menu m WHERE UPPER(m.name) = UPPER(:name)";
+            return this.entityManager.createQuery(jpql, Menu.class).setParameter("name", filtro).getSingleResult();
+        }catch(Exception ex)
+        {
+            return null;
+        }
+    }
+
     public List<Menu> consultPerValue(final BigDecimal filtro)
     {
-        String jpql = "SELECT m FROM Menu m WHERE m.value = :value";
-        return this.entityManager.createQuery(jpql, Menu.class).setParameter("value", filtro).getResultList();
+        try
+        {
+            String jpql = "SELECT m FROM Menu m WHERE m.value = :value";
+            return this.entityManager.createQuery(jpql, Menu.class).setParameter("value", filtro).getResultList();
+        }catch(Exception ex)
+        {
+            return Collections.emptyList();
+        }
     }
 
     public List<Menu> allConsult()
     {
-        String jpql = "SELECT m FROM Menu m";
-        return this.entityManager.createQuery(jpql, Menu.class).getResultList();
+        try
+        {
+            String jpql = "SELECT m FROM Menu m";
+            return this.entityManager.createQuery(jpql, Menu.class).getResultList();
+        }catch(Exception ex)
+        {
+            return Collections.emptyList();
+        }
     }
 
     public void update(final Menu menu)

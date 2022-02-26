@@ -22,5 +22,6 @@ public class MenuService
         dataLoadUtil.productMenuRegister(entityManager);
         MenuDao menuDao = new MenuDao(entityManager);
         System.out.printf("Lista de produtos por valor: " + menuDao.consultPerValue(BigDecimal.valueOf(59.00)));
+        System.out.printf("Produtos pesquisado: " + menuDao.consultPerName("Moqueca").getName());
     }
 }
