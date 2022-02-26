@@ -4,6 +4,7 @@ package br.com.rasmoo.restaurant.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -20,6 +21,9 @@ public class Menu
 
     @ManyToOne
     private Category category;
+
+    @ManyToMany(mappedBy = "menuList")
+    private List<Order> orderList;
 
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
