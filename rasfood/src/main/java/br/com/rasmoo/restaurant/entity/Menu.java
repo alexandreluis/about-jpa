@@ -24,6 +24,15 @@ public class Menu
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
+    public Menu(String name, String description, boolean available, BigDecimal value, Category category, LocalDateTime registrationDate) {
+        this.name = name;
+        this.description = description;
+        this.available = available;
+        this.value = value;
+        this.category = category;
+        RegistrationDate = registrationDate;
+    }
+
     public Menu(){}
 
     public Integer getId() {
@@ -74,14 +83,25 @@ public class Menu
         RegistrationDate = registrationDate;
     }
 
+    public Category getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(Category category)
+    {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
-        return "Dish{" +
+        return "Menu{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", available=" + available +
                 ", value=" + value +
+                ", category=" + category +
                 ", RegistrationDate=" + RegistrationDate +
                 '}';
     }

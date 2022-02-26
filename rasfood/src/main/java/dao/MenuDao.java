@@ -2,6 +2,7 @@ package dao;
 
 import br.com.rasmoo.restaurant.entity.Menu;
 import javax.persistence.EntityManager;
+import java.util.List;
 
 /*
 C = CREATE
@@ -23,9 +24,15 @@ public class MenuDao
         this.entityManager.persist(menu);
     }
 
-    public Menu consult(final Integer id)
+    public Menu idConsult(final Integer id)
     {
         return this.entityManager.find(Menu.class, id);
+    }
+
+    public List<Menu> allConsult()
+    {
+        String sql = "SELECT m FROM Menu m";
+        return this.entityManager.createQuery(sql, Menu.class).getResultList();
     }
 
     public void update(final Menu menu)
