@@ -28,7 +28,7 @@ public class OrderService
         dataLoadUtil.registerClientOrders(entityManager);
         OrderDao orderDao = new OrderDao(entityManager);
 
-        orderDao.seeBestSellingItems().forEach(item-> System.out.println("Item: " + item[0] + "\t Amount: " + item[1]));
+        System.out.println(orderDao.seeBestSellingItems());
         entityManager.getTransaction().commit();
         entityManager.close();
     }

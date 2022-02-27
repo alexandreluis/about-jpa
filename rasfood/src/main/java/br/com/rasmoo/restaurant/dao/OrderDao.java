@@ -2,6 +2,7 @@ package br.com.rasmoo.restaurant.dao;
 
 import br.com.rasmoo.restaurant.entity.Client;
 import br.com.rasmoo.restaurant.entity.Order;
+import br.com.rasmoo.restaurant.valueObject.MainItemsVO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -34,14 +35,14 @@ public class OrderDao
         return this.entityManager.createQuery(jpql, Order.class).getResultList();
     }
 
-    public List<Object[]> seeBestSellingItems()
+    public List<MainItemsVO> seeBestSellingItems()
     {
-        String jpql = "SELECT c.name, SUM(oc.amount) FROM Order o " +
+        String jpql = "SELECT new br.com.rasmoo.restaurant.valueObject.MainItemsVO(c.name, SUM(oc.amount)) FROM Order o " +
                 "JOIN MenuOrders oc ON o.id = oc.menu.id " +
                 "JOIN oc.menu c " +
                 "GROUP BY c.name " +
                 "ORDER BY SUM(oc.amount) DESC";
-        return this.entityManager.createQuery(jpql, Object[].class).getResultList();
+        return this.entityManager.createQuery(jpql, MainItemsVO.class).getResultList();
     }
 
     public void update(final Order order)
