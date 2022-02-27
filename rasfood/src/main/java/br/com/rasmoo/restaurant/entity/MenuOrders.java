@@ -26,6 +26,7 @@ public class MenuOrders
         this.order = order;
         this.menu = menu;
         this.amount = amount;
+        this.value = menu. getValue();
     }
 
     public MenuOrders(){}

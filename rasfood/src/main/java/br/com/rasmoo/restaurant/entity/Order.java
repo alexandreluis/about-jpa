@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,8 +24,8 @@ public class Order
     @ManyToOne
     private Client cliente;
 
-    @OneToMany
-    private List<MenuOrders> menuOrdersList;
+    @OneToMany(mappedBy = "order")
+    private List<MenuOrders> menuOrdersList = new ArrayList<>();
 
     public Order() {}
 
@@ -36,6 +37,12 @@ public class Order
     public Integer getId()
     {
         return id;
+    }
+
+    public void addMenuOrders(MenuOrders menuOrders)
+    {
+        menuOrders.setOrder(this);
+        this.menuOrdersList.add(menuOrders);
     }
 
     public void setId(Integer id)
