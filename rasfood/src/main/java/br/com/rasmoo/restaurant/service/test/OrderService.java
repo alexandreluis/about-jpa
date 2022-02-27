@@ -24,25 +24,11 @@ public class OrderService
         DataLoadUtil dataLoadUtil = new DataLoadUtil();
         dataLoadUtil.categoryRegister(entityManager);
         dataLoadUtil.productMenuRegister(entityManager);
-
-        MenuDao menuDao = new MenuDao(entityManager);
-        ClientDao clientDao = new ClientDao(entityManager);
+        dataLoadUtil.clientRegister(entityManager);
+        dataLoadUtil.registerClientOrders(entityManager);
         OrderDao orderDao = new OrderDao(entityManager);
 
-        Address address = new Address("000000000", "sem teto", "apto 1001", "São Paulo", "SP");
-
-        Client felipe = new Client("11111111111", "Felipe");
-        felipe.addAddress(address);
-
-        Order order = new Order(felipe);
-        order.addMenuOrders(new MenuOrders(menuDao.idConsult(1), 2));
-        order.addMenuOrders(new MenuOrders(menuDao.idConsult(2), 3));
-
-        clientDao.register(felipe);
-        orderDao.register(order);
-
-        System.out.println(">> " + order);
-
+        orderDao.seeBestSellingItems().forEach(item-> System.out.println("Item: " + item[0] + "\t Amount: " + item[1]));
         entityManager.getTransaction().commit();
         entityManager.close();
     }

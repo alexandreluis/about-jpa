@@ -34,6 +34,16 @@ public class OrderDao
         return this.entityManager.createQuery(jpql, Order.class).getResultList();
     }
 
+    public List<Object[]> seeBestSellingItems()
+    {
+        String jpql = "SELECT c.name, SUM(oc.amount) FROM Order o " +
+                "JOIN MenuOrders oc ON o.id = oc.menu.id " +
+                "JOIN oc.menu c " +
+                "GROUP BY c.name " +
+                "ORDER BY SUM(oc.amount) DESC";
+        return this.entityManager.createQuery(jpql, Object[].class).getResultList();
+    }
+
     public void update(final Order order)
     {
         this.entityManager.merge(order);

@@ -1,9 +1,7 @@
 package br.com.rasmoo.restaurant.util;
 
-import br.com.rasmoo.restaurant.entity.Category;
-import br.com.rasmoo.restaurant.entity.Menu;
-import br.com.rasmoo.restaurant.dao.CategoryDao;
-import br.com.rasmoo.restaurant.dao.MenuDao;
+import br.com.rasmoo.restaurant.dao.*;
+import br.com.rasmoo.restaurant.entity.*;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -67,6 +65,96 @@ public class DataLoadUtil
         menuDao.register(caprese);
         menuDao.register(caesar);
         menuDao.register(chevre);
+        entityManager.flush();
+        entityManager.clear();
+    }
+
+    public static void clientRegister(EntityManager entityManager)
+    {
+
+        ClientDao clientDao = new ClientDao(entityManager);
+        AddressDao addressDao = new AddressDao(entityManager);
+
+        Address augusta = new Address("000000000","augusta","casa 43","Sao Paulo","SP");
+        Client felipe = new Client("12345678901","Felipe Ribeiro");
+        felipe.addAddress(augusta);
+
+        Address rioVermelho = new Address("000000001","Rio Vermelho","apto 1001","Salvador","SSA");
+        Client cleber = new Client("111111111111","Cleber Machado");
+        cleber.addAddress(rioVermelho);
+
+        Address leblon = new Address("000000002","Leblon","apto 203","Rio de Janeiro","RJ");
+        Client calvin = new Client("09876543210","Calvin Coelho");
+        calvin.addAddress(leblon);
+
+        Address heitorPenteado = new Address("000000000","Heitor Penteado","apto 101","Sao Paulo","SP");
+        Client tayane = new Client("111111111123","Tayane Lopes");
+        tayane.addAddress(heitorPenteado);
+
+        Address consolacao = new Address("000000000","Consolacao","apto 1001","Sao Paulo","SP");
+        Client denise = new Client("111111111145","Denise Costa");
+        denise.addAddress(consolacao);
+
+        Address nacoesUnidas = new Address("000000000","NacoesUnidas","casa 27","Sao Paulo","SP");
+        Client claudia = new Client("111111111345","Claudia Rosa");
+        claudia.addAddress(nacoesUnidas);
+
+        addressDao.register(augusta);
+        clientDao.register(felipe);
+        addressDao.register(rioVermelho);
+        clientDao.register(cleber);
+        addressDao.register(leblon);
+        clientDao.register(calvin);
+        addressDao.register(heitorPenteado);
+        clientDao.register(tayane);
+        addressDao.register(consolacao);
+        clientDao.register(denise);
+        addressDao.register(nacoesUnidas);
+        clientDao.register(claudia);
+
+        entityManager.flush();
+        entityManager.clear();
+    }
+
+    public static void registerClientOrders(EntityManager entityManager){
+        ClientDao clienteDao = new ClientDao(entityManager);
+        MenuDao cardapio = new MenuDao(entityManager);
+        OrderDao ordemDao = new OrderDao(entityManager);
+        List<Client> clientes = clienteDao.allConsult();
+        List<Menu> cardapioList = cardapio.allConsult();
+
+        Order ordemFelipe = new Order(clientes.get(0));
+        ordemFelipe.addMenuOrders(new MenuOrders(cardapioList.get(0),2));
+        ordemFelipe.addMenuOrders(new MenuOrders(cardapioList.get(5),3));
+
+        Order ordemCleber = new Order(clientes.get(1));
+        ordemCleber.addMenuOrders(new MenuOrders(cardapioList.get(0),1));
+        ordemCleber.addMenuOrders(new MenuOrders(cardapioList.get(1),2));
+        ordemCleber.addMenuOrders(new MenuOrders(cardapioList.get(6),3));
+
+        Order ordemCalvin = new Order(clientes.get(2));
+        ordemCalvin.addMenuOrders(new MenuOrders(cardapioList.get(2),2));
+        ordemCalvin.addMenuOrders(new MenuOrders(cardapioList.get(9),3));
+
+        Order ordemTayane = new Order(clientes.get(3));
+        ordemTayane.addMenuOrders(new MenuOrders(cardapioList.get(0),2));
+        ordemTayane.addMenuOrders(new MenuOrders(cardapioList.get(2),3));
+
+        Order ordemDenise = new Order(clientes.get(4));
+        ordemDenise.addMenuOrders(new MenuOrders(cardapioList.get(4),2));
+        ordemDenise.addMenuOrders(new MenuOrders(cardapioList.get(3),1));
+
+        Order ordemClaudia = new Order(clientes.get(5));
+        ordemClaudia.addMenuOrders(new MenuOrders(cardapioList.get(3),2));
+        ordemClaudia.addMenuOrders(new MenuOrders(cardapioList.get(5),3));
+
+        ordemDao.register(ordemFelipe);
+        ordemDao.register(ordemCleber);
+        ordemDao.register(ordemCalvin);
+        ordemDao.register(ordemTayane);
+        ordemDao.register(ordemDenise);
+        ordemDao.register(ordemClaudia);
+
         entityManager.flush();
         entityManager.clear();
     }
