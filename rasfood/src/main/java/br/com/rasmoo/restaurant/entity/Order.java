@@ -16,33 +16,41 @@ public class Order
     private Integer id;
 
     @Column(name = "total_value")
-    private BigDecimal totalValue;
+    private BigDecimal totalValue = BigDecimal.ZERO;
 
     @Column(name = "criationDate")
     private LocalDateTime dateOfCreation = LocalDateTime.now();
 
     @ManyToOne
-    private Client cliente;
-
+    private Client client;
+    /*
+     * ALL = Realiza todas as operações em cascata
+     * DETACH = Operacao detach executada no pai e no filho
+     * MERGE = Salva pai e filho, podende já haver a entidade gerenciada
+     * PERSIST = Cria pai e filho
+     * REFRESH = Atualiza entidade com operacoes do banco
+     * REMOVE = Propaga remocao entre pai e filho
+     * */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<MenuOrders> menuOrdersList = new ArrayList<>();
 
     public Order() {}
 
-    public Order(Client cliente)
+    public Order(Client client)
     {
-        this.cliente = cliente;
-    }
-
-    public Integer getId()
-    {
-        return id;
+        this.client = client;
     }
 
     public void addMenuOrders(MenuOrders menuOrders)
     {
         menuOrders.setOrder(this);
         this.menuOrdersList.add(menuOrders);
+        this.totalValue = totalValue.add(menuOrders.getRecordValue().multiply(BigDecimal.valueOf(menuOrders.getAmount())));
+    }
+
+    public Integer getId()
+    {
+        return id;
     }
 
     public void setId(Integer id)
@@ -70,14 +78,14 @@ public class Order
         this.dateOfCreation = dateOfCreation;
     }
 
-    public Client getCliente()
+    public Client getClient()
     {
-        return cliente;
+        return client;
     }
 
-    public void setCliente(Client cliente)
+    public void setClient(Client client)
     {
-        this.cliente = cliente;
+        this.client = client;
     }
 
     public List<MenuOrders> getMenuOrdersList()
@@ -91,13 +99,13 @@ public class Order
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", totalValue=" + totalValue +
                 ", dateOfCreation=" + dateOfCreation +
-                ", cliente=" + cliente +
+                ", client=" + client +
+                ", menuOrdersList=" + menuOrdersList +
                 '}';
     }
 }

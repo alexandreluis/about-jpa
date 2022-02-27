@@ -35,40 +35,16 @@ public class MenuDao
         return this.entityManager.find(Menu.class, id);
     }
 
-    public Menu consultPerName(final String filtro)
-    {
-        try
-        {
-            String jpql = "SELECT m FROM Menu m WHERE UPPER(m.name) = UPPER(:name)";
-            return this.entityManager.createQuery(jpql, Menu.class).setParameter("name", filtro).getSingleResult();
-        }catch(Exception ex)
-        {
-            return null;
-        }
-    }
-
     public List<Menu> consultPerValue(final BigDecimal filtro)
     {
-        try
-        {
-            String jpql = "SELECT m FROM Menu m WHERE m.value = :value";
-            return this.entityManager.createQuery(jpql, Menu.class).setParameter("value", filtro).getResultList();
-        }catch(Exception ex)
-        {
-            return Collections.emptyList();
-        }
+        String jpql = "SELECT m FROM Menu m WHERE m.value = :value";
+        return this.entityManager.createQuery(jpql, Menu.class).setParameter("value", filtro).getResultList();
     }
 
     public List<Menu> allConsult()
     {
-        try
-        {
-            String jpql = "SELECT m FROM Menu m";
-            return this.entityManager.createQuery(jpql, Menu.class).getResultList();
-        }catch(Exception ex)
-        {
-            return Collections.emptyList();
-        }
+        String jpql = "SELECT m FROM Menu m";
+        return this.entityManager.createQuery(jpql, Menu.class).getResultList();
     }
 
     public void update(final Menu menu)

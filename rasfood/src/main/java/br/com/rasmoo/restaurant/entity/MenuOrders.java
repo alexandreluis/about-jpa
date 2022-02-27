@@ -17,7 +17,8 @@ public class MenuOrders
     @ManyToOne
     private Menu menu;
 
-    private BigDecimal value;
+    @Column(name = "value_record")
+    private BigDecimal recordValue;
 
     private Integer amount;
 
@@ -25,7 +26,7 @@ public class MenuOrders
     {
         this.menu = menu;
         this.amount = amount;
-        this.value = menu. getValue();
+        this.recordValue = menu.getValue();
     }
 
     public MenuOrders(){}
@@ -60,14 +61,14 @@ public class MenuOrders
         this.menu = menu;
     }
 
-    public BigDecimal getValue()
+    public BigDecimal getRecordValue()
     {
-        return value;
+        return recordValue;
     }
 
-    public void setValue(BigDecimal value)
+    public void setRecordValue(BigDecimal recordValue)
     {
-        this.value = value;
+        this.recordValue = recordValue;
     }
 
     public Integer getAmount()
@@ -85,9 +86,8 @@ public class MenuOrders
     {
         return "MenuOrders{" +
                 "id=" + id +
-                ", order=" + order +
                 ", menu=" + menu +
-                ", value=" + value +
+                ", recordValue=" + recordValue +
                 ", amount=" + amount +
                 '}';
     }

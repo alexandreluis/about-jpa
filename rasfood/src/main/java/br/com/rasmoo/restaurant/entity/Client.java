@@ -1,8 +1,8 @@
 package br.com.rasmoo.restaurant.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -11,16 +11,22 @@ public class Client
     @Id
     private String cpf;
     private String name;
-    private String cep;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Address> addressList = new ArrayList<>();
 
     public Client() {}
 
-    public Client(String cpf, String name, String cep)
+    public Client(String cpf, String name)
     {
         this.cpf = cpf;
         this.name = name;
-        this.cep = cep;
+    }
+
+    public void addAddress(Address address)
+    {
+        address.setClient(this);
+        this.addressList.add(address);
     }
 
     public String getCpf()
@@ -43,23 +49,22 @@ public class Client
         this.name = name;
     }
 
-    public String getCep()
+    public List<Address> getAddressList()
     {
-        return cep;
+        return addressList;
     }
 
-    public void setCep(String cep)
+    public void setAddressList(List<Address> addressList)
     {
-        this.cep = cep;
+        this.addressList = addressList;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Client{" +
                 "cpf='" + cpf + '\'' +
                 ", name='" + name + '\'' +
-                ", cep='" + cep + '\'' +
+                ", addressList=" + addressList +
                 '}';
     }
 }
