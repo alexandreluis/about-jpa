@@ -1,11 +1,8 @@
-package service.test;
+package br.com.rasmoo.restaurant.service.test;
 
-import br.com.rasmoo.restaurant.entity.Category;
-import br.com.rasmoo.restaurant.entity.Menu;
-import dao.CategoryDao;
-import dao.MenuDao;
-import util.DataLoadUtil;
-import util.JPAUtil;
+import br.com.rasmoo.restaurant.dao.MenuDao;
+import br.com.rasmoo.restaurant.util.DataLoadUtil;
+import br.com.rasmoo.restaurant.util.JPAUtil;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;

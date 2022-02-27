@@ -1,9 +1,9 @@
-package util;
+package br.com.rasmoo.restaurant.util;
 
 import br.com.rasmoo.restaurant.entity.Category;
 import br.com.rasmoo.restaurant.entity.Menu;
-import dao.CategoryDao;
-import dao.MenuDao;
+import br.com.rasmoo.restaurant.dao.CategoryDao;
+import br.com.rasmoo.restaurant.dao.MenuDao;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -67,7 +67,7 @@ public class DataLoadUtil
         menuDao.register(caprese);
         menuDao.register(caesar);
         menuDao.register(chevre);
-        entityManager.getTransaction().commit();
+        entityManager.flush();
         entityManager.clear();
     }
 }

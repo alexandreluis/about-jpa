@@ -1,4 +1,4 @@
-package util;
+package br.com.rasmoo.restaurant.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

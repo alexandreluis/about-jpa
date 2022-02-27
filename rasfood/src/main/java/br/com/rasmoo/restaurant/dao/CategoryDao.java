@@ -1,4 +1,4 @@
-package dao;
+package br.com.rasmoo.restaurant.dao;
 
 import br.com.rasmoo.restaurant.entity.Category;
 
