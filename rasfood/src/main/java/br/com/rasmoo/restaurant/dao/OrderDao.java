@@ -45,6 +45,12 @@ public class OrderDao
         return this.entityManager.createQuery(jpql, MainItemsVO.class).getResultList();
     }
 
+    public Order joinFetchClient(final Integer id)
+    {
+        String jpql = "SELECT o FROM Order o JOIN FETCH o.client WHERE o.id = :id";
+        return this.entityManager.createQuery(jpql, Order.class).setParameter("id", id).getSingleResult();
+    }
+
     public void update(final Order order)
     {
         this.entityManager.merge(order);

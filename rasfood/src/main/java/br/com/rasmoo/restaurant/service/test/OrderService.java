@@ -28,11 +28,10 @@ public class OrderService
         dataLoadUtil.registerClientOrders(entityManager);
         OrderDao orderDao = new OrderDao(entityManager);
 
-        Order order = orderDao.idConsult(2);
-        System.out.println("" + order.getTotalValue());
-
-        System.out.println(orderDao.seeBestSellingItems());
-        entityManager.getTransaction().commit();
+        Order order = orderDao.joinFetchClient(2);
+        System.out.println("" + order.getClient().getName());
+        
         entityManager.close();
+        System.out.println("" + order.getClient().getName());
     }
 }
