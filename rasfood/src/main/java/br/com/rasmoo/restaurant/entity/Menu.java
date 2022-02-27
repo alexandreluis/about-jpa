@@ -19,7 +19,7 @@ public class Menu
     private boolean available;
     private BigDecimal value;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @Column(name = "Registration_date")

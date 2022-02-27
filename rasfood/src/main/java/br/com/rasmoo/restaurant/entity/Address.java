@@ -15,7 +15,7 @@ public class Address
     private String city;
     private String state;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
 
     public Address() {}

@@ -21,7 +21,7 @@ public class Order
     @Column(name = "criationDate")
     private LocalDateTime dateOfCreation = LocalDateTime.now();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
     /*
      * ALL = Realiza todas as operações em cascata
