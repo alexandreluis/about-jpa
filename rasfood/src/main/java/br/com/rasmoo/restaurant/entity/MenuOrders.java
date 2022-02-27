@@ -21,9 +21,8 @@ public class MenuOrders
 
     private Integer amount;
 
-    public MenuOrders(Order order, Menu menu, Integer amount)
+    public MenuOrders(Menu menu, Integer amount)
     {
-        this.order = order;
         this.menu = menu;
         this.amount = amount;
         this.value = menu. getValue();

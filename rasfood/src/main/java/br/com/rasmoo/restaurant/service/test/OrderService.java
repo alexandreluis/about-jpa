@@ -29,9 +29,10 @@ public class OrderService
 
         Client felipe = new Client("11111111111", "Felipe", "000000000");
         Order order = new Order(felipe);
-        order.addMenuOrders(new MenuOrders(order, menuDao.idConsult(1), 2));
+        order.addMenuOrders(new MenuOrders(menuDao.idConsult(1), 2));
         clientDao.register(felipe);
         orderDao.register(order);
+        System.out.println(">> " + order.getMenuOrdersList());
         entityManager.getTransaction().commit();
         entityManager.close();
     }

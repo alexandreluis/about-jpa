@@ -24,7 +24,7 @@ public class Order
     @ManyToOne
     private Client cliente;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<MenuOrders> menuOrdersList = new ArrayList<>();
 
     public Order() {}
@@ -78,6 +78,16 @@ public class Order
     public void setCliente(Client cliente)
     {
         this.cliente = cliente;
+    }
+
+    public List<MenuOrders> getMenuOrdersList()
+    {
+        return menuOrdersList;
+    }
+
+    public void setMenuOrdersList(List<MenuOrders> menuOrdersList)
+    {
+        this.menuOrdersList = menuOrdersList;
     }
 
     @Override
