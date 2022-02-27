@@ -23,13 +23,8 @@ public class Order
     @ManyToOne
     private Client cliente;
 
-    @ManyToMany
-    @JoinTable(
-            name = "orders_menu",
-            joinColumns = @JoinColumn(name = "orders_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id")
-    )
-    private List<Menu> menuList;
+    @OneToMany
+    private List<MenuOrders> menuOrdersList;
 
     public Order() {}
 

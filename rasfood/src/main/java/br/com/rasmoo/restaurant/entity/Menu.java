@@ -22,9 +22,6 @@ public class Menu
     @ManyToOne
     private Category category;
 
-    @ManyToMany(mappedBy = "menuList")
-    private List<Order> orderList;
-
     @Column(name = "Registration_date")
     private LocalDateTime RegistrationDate = LocalDateTime.now();
 
