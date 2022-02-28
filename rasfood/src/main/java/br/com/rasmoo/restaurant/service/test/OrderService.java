@@ -4,10 +4,7 @@ import br.com.rasmoo.restaurant.dao.AddressDao;
 import br.com.rasmoo.restaurant.dao.ClientDao;
 import br.com.rasmoo.restaurant.dao.MenuDao;
 import br.com.rasmoo.restaurant.dao.OrderDao;
-import br.com.rasmoo.restaurant.entity.Address;
-import br.com.rasmoo.restaurant.entity.Client;
-import br.com.rasmoo.restaurant.entity.MenuOrders;
-import br.com.rasmoo.restaurant.entity.Order;
+import br.com.rasmoo.restaurant.entity.*;
 import br.com.rasmoo.restaurant.util.DataLoadUtil;
 import br.com.rasmoo.restaurant.util.JPAUtil;
 
@@ -28,12 +25,10 @@ public class OrderService
         dataLoadUtil.clientRegister(entityManager);
         dataLoadUtil.registerClientOrders(entityManager);
 
-        ClientDao clientDao = new ClientDao(entityManager);
-
         AddressDao addressDao = new AddressDao(entityManager);
-        System.out.println("" + addressDao.ClientConsult("SP", "Sao Paulo", null));
-        System.out.println("" + addressDao.ClientConsultUsingCriteria("SP", null, null));
 
+        ClientDao clientDao = new ClientDao(entityManager);
+        System.out.println(clientDao.idConsult(new ClientId("felipe@email.com", "12345678901")));
         entityManager.close();
     }
 }

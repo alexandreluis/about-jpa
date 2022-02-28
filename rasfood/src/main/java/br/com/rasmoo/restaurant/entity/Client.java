@@ -8,18 +8,22 @@ import java.util.List;
 @Table(name = "clients")
 public class Client
 {
-    @Id
-    private String cpf;
+    @EmbeddedId
+    private ClientId clientId;
+
     private String name;
+
+    @Embedded
+    private Contact contact;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Address> addressList = new ArrayList<>();
 
     public Client() {}
 
-    public Client(String cpf, String name)
+    public Client(String cpf, String email, String name)
     {
-        this.cpf = cpf;
+        this.clientId = new  ClientId(cpf, email);
         this.name = name;
     }
 
@@ -29,14 +33,32 @@ public class Client
         this.addressList.add(address);
     }
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public String getCpf()
     {
-        return cpf;
+        return clientId.getCpf();
     }
 
     public void setCpf(String cpf)
     {
-        this.cpf = cpf;
+        this.clientId.setCpf(cpf);
+    }
+
+    public String getEmail()
+    {
+        return clientId.getEmail();
+    }
+
+    public void setEmail(String Email)
+    {
+        this.clientId.setEmail(Email);
     }
 
     public String getName()
@@ -62,8 +84,10 @@ public class Client
     @Override
     public String toString() {
         return "Client{" +
-                "cpf='" + cpf + '\'' +
+                "cpf='" + clientId.getCpf() + '\'' +
+                "cpf='" + clientId.getEmail() + '\'' +
                 ", name='" + name + '\'' +
+                ", contact=" + contact +
                 ", addressList=" + addressList +
                 '}';
     }

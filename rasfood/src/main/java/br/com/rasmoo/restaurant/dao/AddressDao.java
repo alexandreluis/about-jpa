@@ -41,7 +41,7 @@ public class AddressDao
 
     public List<ClientVO> ClientConsult(final String state, final String city, final String street)
     {
-        String jpql = "SELECT new br.com.rasmoo.restaurant.valueObject.ClientVO(a.client.cpf, a.client.name) FROM Address a " +
+        String jpql = "SELECT new br.com.rasmoo.restaurant.valueObject.ClientVO(a.client.clientId.cpf, a.client.name) FROM Address a " +
                 "WHERE 1 = 1";
 
         if(Objects.nonNull(state))
@@ -85,7 +85,7 @@ public class AddressDao
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ClientVO> criteriaQuery = builder.createQuery(ClientVO.class);
         Root<Address> root = criteriaQuery.from(Address.class);
-        criteriaQuery.multiselect(root.get("client").get("cpf"), root.get("client").get("name"));
+        criteriaQuery.multiselect(root.get("client").get("clientId").get("cpf"), root.get("client").get("name"));
         Predicate predicate = builder.and();
 
         if(Objects.nonNull(state))

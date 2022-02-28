@@ -71,32 +71,31 @@ public class DataLoadUtil
 
     public static void clientRegister(EntityManager entityManager)
     {
-
         ClientDao clientDao = new ClientDao(entityManager);
         AddressDao addressDao = new AddressDao(entityManager);
 
         Address augusta = new Address("000000000","augusta","casa 43","Sao Paulo","SP");
-        Client felipe = new Client("12345678901","Felipe Ribeiro");
+        Client felipe = new Client("12345678901","felipe@email.com","Felipe Ribeiro");
         felipe.addAddress(augusta);
 
         Address rioVermelho = new Address("000000001","Rio Vermelho","apto 1001","Salvador","SSA");
-        Client cleber = new Client("111111111111","Cleber Machado");
+        Client cleber = new Client("111111111111","Cleber Machado@email.com","Cleber Machado");
         cleber.addAddress(rioVermelho);
 
         Address leblon = new Address("000000002","Leblon","apto 203","Rio de Janeiro","RJ");
-        Client calvin = new Client("09876543210","Calvin Coelho");
+        Client calvin = new Client("09876543210","Calvin Coelho@email.com","Calvin Coelho");
         calvin.addAddress(leblon);
 
         Address heitorPenteado = new Address("000000000","Heitor Penteado","apto 101","Sao Paulo","SP");
-        Client tayane = new Client("111111111123","Tayane Lopes");
+        Client tayane = new Client("111111111123","tayane@email.com","Tayane Lopes");
         tayane.addAddress(heitorPenteado);
 
         Address consolacao = new Address("000000000","Consolacao","apto 1001","Sao Paulo","SP");
-        Client denise = new Client("111111111145","Denise Costa");
+        Client denise = new Client("111111111145","Denise Costa@email.com","Denise Costa");
         denise.addAddress(consolacao);
 
         Address nacoesUnidas = new Address("000000000","NacoesUnidas","casa 27","Sao Paulo","SP");
-        Client claudia = new Client("111111111345","Claudia Rosa");
+        Client claudia = new Client("111111111345","Claudia Rosa@email.com","Claudia Rosa");
         claudia.addAddress(nacoesUnidas);
 
         addressDao.register(augusta);
@@ -116,10 +115,12 @@ public class DataLoadUtil
         entityManager.clear();
     }
 
-    public static void registerClientOrders(EntityManager entityManager){
+    public static void registerClientOrders(EntityManager entityManager)
+    {
         ClientDao clienteDao = new ClientDao(entityManager);
         MenuDao cardapio = new MenuDao(entityManager);
         OrderDao ordemDao = new OrderDao(entityManager);
+
         List<Client> clientes = clienteDao.allConsult();
         List<Menu> cardapioList = cardapio.allConsult();
 
