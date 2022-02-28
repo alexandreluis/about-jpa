@@ -7,6 +7,10 @@ import br.com.rasmoo.restaurant.valueObject.ClientVO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,6 +78,34 @@ public class AddressDao
         }
 
         return typedQuery.getResultList();
+    }
+
+    public List<ClientVO> ClientConsultUsingCriteria(final String state, final String city, final String street)
+    {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ClientVO> criteriaQuery = builder.createQuery(ClientVO.class);
+        Root<Address> root = criteriaQuery.from(Address.class);
+        criteriaQuery.multiselect(root.get("client").get("cpf"), root.get("client").get("name"));
+        Predicate predicate = builder.and();
+
+        if(Objects.nonNull(state))
+        {
+            predicate = builder.and(predicate, builder.equal(builder.upper(root.get("state")), state.toUpperCase()));
+        }
+
+        if(Objects.nonNull(city))
+        {
+            predicate = builder.and(predicate, builder.equal(builder.upper(root.get("city")), city.toUpperCase()));
+        }
+
+        if(Objects.nonNull(street))
+        {
+            predicate = builder.and(predicate, builder.equal(builder.upper(root.get("street")), street.toUpperCase()));
+        }
+
+        criteriaQuery.where(predicate);
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     public void update(final Address address)

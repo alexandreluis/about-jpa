@@ -32,6 +32,7 @@ public class OrderService
 
         AddressDao addressDao = new AddressDao(entityManager);
         System.out.println("" + addressDao.ClientConsult("SP", "Sao Paulo", null));
+        System.out.println("" + addressDao.ClientConsultUsingCriteria("SP", null, null));
 
         entityManager.close();
     }
