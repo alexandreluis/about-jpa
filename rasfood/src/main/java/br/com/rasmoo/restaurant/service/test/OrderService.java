@@ -26,12 +26,11 @@ public class OrderService
         dataLoadUtil.productMenuRegister(entityManager);
         dataLoadUtil.clientRegister(entityManager);
         dataLoadUtil.registerClientOrders(entityManager);
-        OrderDao orderDao = new OrderDao(entityManager);
 
-        Order order = orderDao.joinFetchClient(2);
-        System.out.println("" + order.getClient().getName());
-        
+        ClientDao clientDao = new ClientDao(entityManager);
+
+        System.out.println("" + clientDao.consultPerName("Tayane"));
+
         entityManager.close();
-        System.out.println("" + order.getClient().getName());
     }
 }
