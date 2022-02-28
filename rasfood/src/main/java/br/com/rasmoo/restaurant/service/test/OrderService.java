@@ -1,5 +1,6 @@
 package br.com.rasmoo.restaurant.service.test;
 
+import br.com.rasmoo.restaurant.dao.AddressDao;
 import br.com.rasmoo.restaurant.dao.ClientDao;
 import br.com.rasmoo.restaurant.dao.MenuDao;
 import br.com.rasmoo.restaurant.dao.OrderDao;
@@ -29,7 +30,8 @@ public class OrderService
 
         ClientDao clientDao = new ClientDao(entityManager);
 
-        System.out.println("" + clientDao.consultPerName("Tayane"));
+        AddressDao addressDao = new AddressDao(entityManager);
+        System.out.println("" + addressDao.ClientConsult("SP", "Sao Paulo", "augusta"));
 
         entityManager.close();
     }
